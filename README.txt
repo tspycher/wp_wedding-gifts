@@ -32,6 +32,7 @@ Yea, i think so
 
 == Screenshots ==
 
+Sorry, no screenshots at the moment
 
 == Changelog ==
 
