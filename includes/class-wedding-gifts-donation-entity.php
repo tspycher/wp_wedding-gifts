@@ -124,7 +124,7 @@ class Wedding_Gifts_Donation_Entity extends Wedding_Gifts_EntityManager{
      */
     public function setWho( $who, $override = false ) {
         global $current_user;
-        $this->who = ($current_user->ID and !$override ? $current_user->data->display_name : $who);
+        $this->who = (($current_user->ID and !$override) ? $current_user->data->display_name : $who);
         return $this;
     }
 

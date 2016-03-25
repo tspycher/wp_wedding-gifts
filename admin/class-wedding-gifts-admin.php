@@ -59,7 +59,14 @@ class Wedding_Gifts_Admin {
 	}
 
 	public function menu_display() {
-		print "blubb";
+		$r = new Wedding_Gifts_Renderer();
+
+		$donations = Wedding_Gifts_Donation_Entity::findAll();
+		$gifts = Wedding_Gifts_Entity::findAll();
+
+		print $r->template('list_donations', $donations, 'admin');
+		print $r->template('list_gifts', $gifts, 'admin');
+
 	}
 
 	/**
