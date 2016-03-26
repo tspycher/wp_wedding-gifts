@@ -46,9 +46,9 @@ class Wedding_Gifts_Activator {
 			id INT NOT NULL AUTO_INCREMENT,
 			gift_id INT NOT NULL,
 			comment text NOT NULL,
-		  	name text NOT NULL,
+		  	`name` text NOT NULL,
 			amount double NOT NULL,
-
+		  	email text,
 			`date` DATETIME NULL DEFAULT NOW(),
 			PRIMARY KEY (`id`),
 			CONSTRAINT `fk_gifts`
@@ -70,9 +70,9 @@ class Wedding_Gifts_Activator {
 			name varchar(250) NOT NULL,
 			description text NOT NULL,
 			picture_url text,
-			price double NOT NULL,
+			price double,
 			fixprice tinyint(1),
-			url varchar(250) NOT NULL,
+			url varchar(250),
 			PRIMARY KEY (`id`)
 		) %s;", Wedding_Gifts_Entity::dbname(), $wpdb->get_charset_collate());
 

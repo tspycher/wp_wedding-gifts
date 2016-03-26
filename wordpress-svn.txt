@@ -1,0 +1,2 @@
+git svn dcommit
+svn cp https://plugins.svn.wordpress.org/wedding-gifts/trunk https://plugins.svn.wordpress.org/wedding-gifts/tags/1.0.0 -m "official release"

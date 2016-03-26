@@ -53,6 +53,11 @@ class Wedding_Gifts_Entity extends Wedding_Gifts_EntityManager {
         return $this;
     }
 
+    public function isGiftable() {
+        if($this->getPrice() <= $this->getTotal()) return false;
+        return true;
+    }
+
     /**
      * @return mixed
      */
@@ -154,8 +159,11 @@ class Wedding_Gifts_Entity extends Wedding_Gifts_EntityManager {
         return floatval(array_reduce($this->getDonations(), function($i, $obj) { return $i += $obj->getAmount(); }));
     }
 
-    public function getPercent() {
-        return 100 / floatval($this->getPrice()) * $this->getTotal();
+    public function getPercent($round = true) {
+        $x =  100 / floatval($this->getPrice()) * $this->getTotal();
+
+        if(!$round) return $x;
+        return intval(round($x,0));
     }
 
     static function loadFromRow($row) {

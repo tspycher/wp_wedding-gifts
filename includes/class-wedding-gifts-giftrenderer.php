@@ -13,7 +13,7 @@ class Wedding_Gifts_Renderer {
         foreach(Wedding_Gifts_Entity::findAll() as $gift) {
             $result[] = $this->render_gift($gift);
         }
-        return $this->template('gifts', join("\n", $result));
+        return $this->template('gifts', $result);
     }
 
     public function render_gift(Wedding_Gifts_Entity $gift) {
