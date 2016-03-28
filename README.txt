@@ -4,7 +4,7 @@ Donate link: http://tspycher.com
 Tags: wedding, gift, registry
 Requires at least: 3.0.1
 Tested up to: 3.4
-Stable tag: 4.3
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,10 @@ Yea, i think so
 Sorry, no screenshots at the moment
 
 == Changelog ==
+
+= 1.1 =
+* Many Style fixes
+* Support to send mail
 
 = 1.0 =
 * first release of the plugin

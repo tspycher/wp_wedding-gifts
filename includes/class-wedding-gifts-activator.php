@@ -47,6 +47,7 @@ class Wedding_Gifts_Activator {
 			gift_id INT NOT NULL,
 			comment text NOT NULL,
 		  	`name` text NOT NULL,
+		  	user_id INT,
 			amount double NOT NULL,
 		  	email text,
 			`date` DATETIME NULL DEFAULT NOW(),

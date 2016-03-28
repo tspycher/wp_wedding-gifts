@@ -12,6 +12,8 @@ class Wedding_Gifts_Donation_Entity extends Wedding_Gifts_EntityManager{
     protected $amount;
     protected $comment;
     protected $who;
+    protected $email;
+    protected $user_id;
     protected $date;
 
 
@@ -124,7 +126,48 @@ class Wedding_Gifts_Donation_Entity extends Wedding_Gifts_EntityManager{
      */
     public function setWho( $who, $override = false ) {
         global $current_user;
-        $this->who = (($current_user->ID and !$override) ? $current_user->data->display_name : $who);
+        if($current_user->ID and !$override) {
+            $this->who = $current_user->data->display_name;
+            $this->email = $current_user->data->user_email;
+            $this->user_id =  $current_user->data->ID;
+        } else {
+            $this->who = $who;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail() {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     *
+     * @return $this
+     */
+    public function setEmail( $email ) {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId() {
+        return $this->user_id;
+    }
+
+    /**
+     * @param mixed $user_id
+     *
+     * @return $this
+     */
+    public function setUserId( $user_id ) {
+        $this->user_id = $user_id;
         return $this;
     }
 
@@ -136,6 +179,8 @@ class Wedding_Gifts_Donation_Entity extends Wedding_Gifts_EntityManager{
             ->setGiftId($row->gift_id)
             ->setComment($row->comment)
             ->setWho($row->name, true)
+            ->setEmail($row->email, true)
+            ->setUserId($row->user_id)
             ->setAmount(floatval($row->amount))
             ->setDate($row->date);
         return $o;
@@ -148,8 +193,8 @@ class Wedding_Gifts_Donation_Entity extends Wedding_Gifts_EntityManager{
             // Update
         } else {
             // Insert
-            $sql = sprintf('INSERT INTO %s (`gift_id`, `comment`, `name`, `amount`) VALUES (\'%s\', \'%s\', \'%s\', \'%s\')',
-                static::dbname(), $this->getGiftId(), $this->getComment(), $this->getWho(), $this->getAmount());
+            $sql = sprintf('INSERT INTO %s (`gift_id`, `comment`, `name`, `amount`, `email`, `user_id`) VALUES (\'%s\', \'%s\', \'%s\', \'%s\', \'%s\', \'%s\')',
+                static::dbname(), $this->getGiftId(), $this->getComment(), $this->getWho(), $this->getAmount(), $this->getEmail(), $this->getUserId());
         }
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta( $sql );

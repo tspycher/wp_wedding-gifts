@@ -116,10 +116,32 @@ class Wedding_Gifts_Public {
 			->setAmount($data['_amount'])
 			->setComment($data['_comment'])
 			->setGiftId($gift->getId())
+			->setEmail(array_key_exists('_email', $data) ? $data['_email'] : null)
 			->setWho($data['_name']);
 		$donation->store();
 
+		$renderer = new Wedding_Gifts_Renderer();
+
+		self::sendMail(
+			sprintf("%s <%s>", $donation->getWho(), $donation->getEmail()),
+			get_option('gift_email_subject'),
+			$renderer->template('email', array('donation'=>$donation, 'account'=>get_option('gift_bank_account'))));
+
 		$gift_notifications[] = "thank_you";
+	}
+
+	static public function sendMail($to, $subject, $body, $headers=array()) {
+		if(!$subject) $subject = 'Dein Geschenk';
+
+		if(get_option('gift_email_bcc')) {
+			$bcc     = array_map( function ( $x ) {
+				return sprintf( "BCC: %s", $x );
+			},
+				explode( ',', get_option( 'gift_email_bcc' ) ) );
+			$headers = array_merge( $headers, $bcc );
+		}
+
+		return wp_mail($to, $subject, $body,$headers);
 	}
 
 }

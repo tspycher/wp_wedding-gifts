@@ -22,6 +22,8 @@
  */
 class Wedding_Gifts_Admin {
 
+	const SETTINGS_GROUP = 'gifts-settings-group';
+
 	/**
 	 * The ID of this plugin.
 	 *
@@ -64,8 +66,17 @@ class Wedding_Gifts_Admin {
 		$donations = Wedding_Gifts_Donation_Entity::findAll();
 		$gifts = Wedding_Gifts_Entity::findAll();
 
+		print $r->template('options', $donations, 'admin');
 		print $r->template('list_donations', $donations, 'admin');
 		print $r->template('list_gifts', $gifts, 'admin');
+
+	}
+
+	public function register_settings() {
+		//register our settings
+		register_setting( static::SETTINGS_GROUP, 'gift_email_subject' );
+		register_setting( static::SETTINGS_GROUP, 'gift_email_bcc' );
+		register_setting( static::SETTINGS_GROUP, 'gift_bank_account' );
 
 	}
 

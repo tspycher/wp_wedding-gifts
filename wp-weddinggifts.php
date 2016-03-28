@@ -9,14 +9,13 @@
  * that starts the plugin.
  *
  * @link              http://tspycher.com
- * @since             1.0.1
  * @package           Wedding_Gifts
  *
  * @wordpress-plugin
  * Plugin Name:       Wedding Gifts
  * Plugin URI:        http://tspycher.com
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Author:            Thomas Spycher
  * Author URI:        http://tspycher.com
  * License:           GPL-2.0+
